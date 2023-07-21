@@ -1,0 +1,93 @@
+<!Admin html>
+<html>
+<head>
+  <title>Resume Uploader</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    #uploadForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #resumeInput {
+      padding: 10px;
+    }
+
+    #submitBtn {
+      padding: 10px 20px;
+    }
+
+    #urlContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #urlInput {
+      width: 300px;
+      padding: 10px;
+    }
+
+    #copyBtn {
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resume Uploader</h1>
+
+  <form id="uploadForm">
+    <input type="file" id="resumeInput" accept=".pdf,.doc,.docx">
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+
+  <div id="urlContainer" style="display: none;">
+    <input type="text" id="urlInput" readonly>
+    <button id="copyBtn">Copy URL</button>
+  </div>
+
+  <script>
+    const uploadForm = document.getElementById('uploadForm');
+    const resumeInput = document.getElementById('resumeInput');
+    const urlContainer = document.getElementById('urlContainer');
+    const urlInput = document.getElementById('urlInput');
+    const copyBtn = document.getElementById('copyBtn');
+
+    uploadForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Simulated backend response
+      const backendResponse = {
+        url: 'https://example.com/test-url' // Replace with your backend response
+      };
+
+      generateTestURL(backendResponse.url);
+    });
+
+    function generateTestURL(url) {
+      urlInput.value = url;
+      urlContainer.style.display = 'block';
+    }
+
+    copyBtn.addEventListener('click', function() {
+      urlInput.select();
+      urlInput.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert('URL copied to clipboard!');
+    });
+  </script>
+</body>
+</html>
